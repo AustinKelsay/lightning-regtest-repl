@@ -1,0 +1,35 @@
+2024-02-26 23:36:17.547 [INF] LTND: Version: 0.17.0-beta commit=, build=production, logging=default, debuglevel=info
+2024-02-26 23:36:17.548 [INF] LTND: Active chain: Bitcoin (network=regtest)
+2024-02-26 23:36:17.548 [INF] RPCS: Generating TLS certificates...
+2024-02-26 23:36:17.550 [INF] RPCS: Done generating TLS certificates
+2024-02-26 23:36:17.551 [ERR] LTND: Shutting down because error in main method: unable to listen on 127.0.0.1:10009: listen tcp4 127.0.0.1:10009: bind: address already in use
+2024-02-26 23:36:17.553 [INF] LTND: Shutdown complete
+
+2024-02-26 23:40:09.124 [INF] LTND: Version: 0.17.0-beta commit=, build=production, logging=default, debuglevel=info
+2024-02-26 23:40:09.124 [INF] LTND: Active chain: Bitcoin (network=regtest)
+2024-02-26 23:40:09.145 [INF] RPCS: RPC server listening on 127.0.0.1:10010
+2024-02-26 23:40:09.155 [ERR] LTND: gRPC proxy unable to listen on 127.0.0.1:8080
+2024-02-26 23:40:09.156 [ERR] LTND: Shutting down because error in main method: error starting REST proxy: listen tcp4 127.0.0.1:8080: bind: address already in use
+2024-02-26 23:40:09.168 [INF] LTND: Shutdown complete
+
+2024-02-26 23:40:54.033 [INF] LTND: Version: 0.17.0-beta commit=, build=production, logging=default, debuglevel=info
+2024-02-26 23:40:54.033 [INF] LTND: Active chain: Bitcoin (network=regtest)
+2024-02-26 23:40:54.049 [INF] RPCS: RPC server listening on 127.0.0.1:10010
+2024-02-26 23:40:54.054 [ERR] LTND: gRPC proxy unable to listen on 127.0.0.1:8080
+2024-02-26 23:40:54.056 [ERR] LTND: Shutting down because error in main method: error starting REST proxy: listen tcp4 127.0.0.1:8080: bind: address already in use
+2024-02-26 23:40:54.061 [INF] LTND: Shutdown complete
+
+2024-02-26 23:42:24.384 [INF] LTND: Version: 0.17.0-beta commit=, build=production, logging=default, debuglevel=info
+2024-02-26 23:42:24.384 [INF] LTND: Active chain: Bitcoin (network=regtest)
+2024-02-26 23:42:24.387 [INF] RPCS: RPC server listening on 127.0.0.1:10010
+2024-02-26 23:42:24.400 [INF] RPCS: gRPC proxy started at 127.0.0.1:8081
+2024-02-26 23:42:24.400 [INF] LTND: Opening the main database, this might take a few minutes...
+2024-02-26 23:42:24.400 [INF] LTND: Opening bbolt database, sync_freelist=false, auto_compact=false
+2024-02-26 23:42:24.414 [INF] LTND: Creating local graph and channel state DB instances
+2024-02-26 23:42:24.475 [INF] CHDB: Checking for schema update: latest_version=31, db_version=31
+2024-02-26 23:42:24.475 [INF] CHDB: Checking for optional update: prune_revocation_log=false, db_version=empty
+2024-02-26 23:42:24.475 [INF] LTND: Database(s) now open (time_to_open=74.763327ms)!
+2024-02-26 23:42:24.619 [INF] CHRE: Primary chain is set to: bitcoin
+2024-02-26 23:42:24.661 [INF] LNWL: Started listening for bitcoind block notifications via ZMQ on 127.0.0.1:28332
+2024-02-26 23:42:24.663 [INF] LNWL: Started listening for bitcoind transaction notifications via ZMQ on 127.0.0.1:28333
+2024-02-26 23:42:24.664 [INF] LNWL: Started polling mempool to cache new transactions
