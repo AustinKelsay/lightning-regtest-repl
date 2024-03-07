@@ -2,3 +2,7 @@ run = "sh start_nodes.sh"
 
 [nix]
 channel = "stable-23_11"
+
+[[ports]]
+localPort = 18444
+externalPort = 80

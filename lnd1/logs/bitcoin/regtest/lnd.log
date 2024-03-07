@@ -158,3 +158,361 @@
 2024-02-26 23:42:23.299 [INF] ATPL: Instantiating autopilot with active=false, max_channels=5, allocation=0.600000, min_chan_size=20000, max_chan_size=16777215, private=false, min_confs=1, conf_target=3
 2024-02-26 23:42:23.299 [INF] LTND: We're not running within systemd or the service type is not 'notify'
 2024-02-26 23:42:23.303 [INF] LTND: Waiting for chain backend to finish sync, start_height=0
+2024-03-07 18:42:05.050 [INF] LTND: Version: 0.17.0-beta commit=, build=production, logging=default, debuglevel=info
+2024-03-07 18:42:05.050 [INF] LTND: Active chain: Bitcoin (network=regtest)
+2024-03-07 18:42:05.067 [INF] RPCS: RPC server listening on 127.0.0.1:10009
+2024-03-07 18:42:05.081 [INF] RPCS: gRPC proxy started at 127.0.0.1:8080
+2024-03-07 18:42:05.081 [INF] LTND: Opening the main database, this might take a few minutes...
+2024-03-07 18:42:05.082 [INF] LTND: Opening bbolt database, sync_freelist=false, auto_compact=false
+2024-03-07 18:42:05.089 [INF] LTND: Creating local graph and channel state DB instances
+2024-03-07 18:42:05.194 [INF] CHDB: Checking for schema update: latest_version=31, db_version=31
+2024-03-07 18:42:05.194 [INF] CHDB: Checking for optional update: prune_revocation_log=false, db_version=empty
+2024-03-07 18:42:05.194 [INF] LTND: Database(s) now open (time_to_open=112.165003ms)!
+2024-03-07 18:42:05.341 [INF] CHRE: Primary chain is set to: bitcoin
+2024-03-07 18:42:05.392 [INF] LNWL: Started listening for bitcoind block notifications via ZMQ on 127.0.0.1:28332
+2024-03-07 18:42:05.392 [INF] LNWL: Started polling mempool to cache new transactions
+2024-03-07 18:42:05.392 [INF] LNWL: Started listening for bitcoind transaction notifications via ZMQ on 127.0.0.1:28333
+2024-03-07 18:42:07.209 [INF] LNWL: Opened wallet
+2024-03-07 18:42:08.860 [INF] LNWL: The wallet has been unlocked without a time limit
+2024-03-07 18:42:08.872 [INF] CHRE: LightningWallet opened
+2024-03-07 18:42:08.905 [INF] HSWC: Cleaning circuits from disk for closed channels
+2024-03-07 18:42:08.905 [INF] HSWC: Finished cleaning: no closed channels found, no actions taken.
+2024-03-07 18:42:08.905 [INF] HSWC: Restoring in-memory circuit state from disk
+2024-03-07 18:42:08.909 [INF] HSWC: Payment circuits loaded: num_pending=0, num_open=0
+2024-03-07 18:42:08.913 [INF] LNWL: Started rescan from block 0f9188f13cb7b2c71f2a335e3a4fc328bf5beb436012afca590b1a11466e2206 (height 0) for 0 addresses
+2024-03-07 18:42:08.925 [INF] LNWL: Catching up block hashes to height 0, this might take a while
+2024-03-07 18:42:08.933 [INF] LNWL: Done catching up block hashes
+2024-03-07 18:42:08.933 [INF] LNWL: Finished rescan for 0 addresses (synced to block 0f9188f13cb7b2c71f2a335e3a4fc328bf5beb436012afca590b1a11466e2206, height 0)
+2024-03-07 18:42:08.949 [INF] LTND: Channel backup proxy channel notifier starting
+2024-03-07 18:42:08.949 [INF] ATPL: Instantiating autopilot with active=false, max_channels=5, allocation=0.600000, min_chan_size=20000, max_chan_size=16777215, private=false, min_confs=1, conf_target=3
+2024-03-07 18:42:08.949 [INF] LTND: We're not running within systemd or the service type is not 'notify'
+2024-03-07 18:42:08.953 [INF] LTND: Waiting for chain backend to finish sync, start_height=0
+2024-03-07 18:42:58.448 [INF] LTND: Version: 0.17.0-beta commit=, build=production, logging=default, debuglevel=info
+2024-03-07 18:42:58.449 [INF] LTND: Active chain: Bitcoin (network=regtest)
+2024-03-07 18:42:58.452 [INF] RPCS: RPC server listening on 127.0.0.1:10009
+2024-03-07 18:42:58.458 [INF] RPCS: gRPC proxy started at 127.0.0.1:8080
+2024-03-07 18:42:58.461 [INF] LTND: Opening the main database, this might take a few minutes...
+2024-03-07 18:42:58.463 [INF] LTND: Opening bbolt database, sync_freelist=false, auto_compact=false
+2024-03-07 18:42:58.465 [INF] LTND: Creating local graph and channel state DB instances
+2024-03-07 18:42:58.607 [INF] CHDB: Checking for schema update: latest_version=31, db_version=31
+2024-03-07 18:42:58.607 [INF] CHDB: Checking for optional update: prune_revocation_log=false, db_version=empty
+2024-03-07 18:42:58.607 [INF] LTND: Database(s) now open (time_to_open=142.254572ms)!
+2024-03-07 18:42:58.734 [INF] CHRE: Primary chain is set to: bitcoin
+2024-03-07 18:42:58.787 [INF] LNWL: Started listening for bitcoind block notifications via ZMQ on 127.0.0.1:28332
+2024-03-07 18:42:58.791 [INF] LNWL: Started listening for bitcoind transaction notifications via ZMQ on 127.0.0.1:28333
+2024-03-07 18:42:58.793 [INF] LNWL: Started polling mempool to cache new transactions
+2024-03-07 18:43:00.488 [INF] LNWL: Opened wallet
+2024-03-07 18:43:02.165 [INF] LNWL: The wallet has been unlocked without a time limit
+2024-03-07 18:43:02.179 [INF] CHRE: LightningWallet opened
+2024-03-07 18:43:02.217 [INF] HSWC: Cleaning circuits from disk for closed channels
+2024-03-07 18:43:02.217 [INF] HSWC: Finished cleaning: no closed channels found, no actions taken.
+2024-03-07 18:43:02.217 [INF] HSWC: Restoring in-memory circuit state from disk
+2024-03-07 18:43:02.220 [INF] HSWC: Payment circuits loaded: num_pending=0, num_open=0
+2024-03-07 18:43:02.228 [INF] LNWL: Started rescan from block 0f9188f13cb7b2c71f2a335e3a4fc328bf5beb436012afca590b1a11466e2206 (height 0) for 0 addresses
+2024-03-07 18:43:02.247 [INF] LNWL: Catching up block hashes to height 0, this might take a while
+2024-03-07 18:43:02.249 [INF] LTND: Channel backup proxy channel notifier starting
+2024-03-07 18:43:02.251 [INF] ATPL: Instantiating autopilot with active=false, max_channels=5, allocation=0.600000, min_chan_size=20000, max_chan_size=16777215, private=false, min_confs=1, conf_target=3
+2024-03-07 18:43:02.252 [INF] LNWL: Done catching up block hashes
+2024-03-07 18:43:02.252 [INF] LNWL: Finished rescan for 0 addresses (synced to block 0f9188f13cb7b2c71f2a335e3a4fc328bf5beb436012afca590b1a11466e2206, height 0)
+2024-03-07 18:43:02.252 [INF] LTND: We're not running within systemd or the service type is not 'notify'
+2024-03-07 18:43:02.257 [INF] LTND: Waiting for chain backend to finish sync, start_height=0
+2024-03-07 18:45:40.410 [INF] LTND: Version: 0.17.0-beta commit=, build=production, logging=default, debuglevel=info
+2024-03-07 18:45:40.410 [INF] LTND: Active chain: Bitcoin (network=regtest)
+2024-03-07 18:45:40.418 [INF] RPCS: RPC server listening on 127.0.0.1:10009
+2024-03-07 18:45:40.424 [INF] RPCS: gRPC proxy started at 127.0.0.1:8080
+2024-03-07 18:45:40.427 [INF] LTND: Opening the main database, this might take a few minutes...
+2024-03-07 18:45:40.427 [INF] LTND: Opening bbolt database, sync_freelist=false, auto_compact=false
+2024-03-07 18:45:40.428 [INF] LTND: Creating local graph and channel state DB instances
+2024-03-07 18:45:40.545 [INF] CHDB: Checking for schema update: latest_version=31, db_version=31
+2024-03-07 18:45:40.545 [INF] CHDB: Checking for optional update: prune_revocation_log=false, db_version=empty
+2024-03-07 18:45:40.545 [INF] LTND: Database(s) now open (time_to_open=117.754035ms)!
+2024-03-07 18:45:40.679 [INF] CHRE: Primary chain is set to: bitcoin
+2024-03-07 18:45:40.724 [INF] LNWL: Started listening for bitcoind block notifications via ZMQ on 127.0.0.1:28332
+2024-03-07 18:45:40.724 [INF] LNWL: Started listening for bitcoind transaction notifications via ZMQ on 127.0.0.1:28333
+2024-03-07 18:45:40.724 [INF] LNWL: Started polling mempool to cache new transactions
+2024-03-07 18:45:42.775 [INF] LNWL: Opened wallet
+2024-03-07 18:45:44.537 [INF] LNWL: The wallet has been unlocked without a time limit
+2024-03-07 18:45:44.550 [INF] CHRE: LightningWallet opened
+2024-03-07 18:45:44.598 [INF] LNWL: Started rescan from block 0f9188f13cb7b2c71f2a335e3a4fc328bf5beb436012afca590b1a11466e2206 (height 0) for 0 addresses
+2024-03-07 18:45:44.602 [INF] HSWC: Cleaning circuits from disk for closed channels
+2024-03-07 18:45:44.603 [INF] HSWC: Finished cleaning: no closed channels found, no actions taken.
+2024-03-07 18:45:44.603 [INF] HSWC: Restoring in-memory circuit state from disk
+2024-03-07 18:45:44.607 [INF] HSWC: Payment circuits loaded: num_pending=0, num_open=0
+2024-03-07 18:45:44.616 [INF] LNWL: Catching up block hashes to height 0, this might take a while
+2024-03-07 18:45:44.620 [INF] LNWL: Done catching up block hashes
+2024-03-07 18:45:44.620 [INF] LNWL: Finished rescan for 0 addresses (synced to block 0f9188f13cb7b2c71f2a335e3a4fc328bf5beb436012afca590b1a11466e2206, height 0)
+2024-03-07 18:45:44.640 [INF] LTND: Channel backup proxy channel notifier starting
+2024-03-07 18:45:44.640 [INF] ATPL: Instantiating autopilot with active=false, max_channels=5, allocation=0.600000, min_chan_size=20000, max_chan_size=16777215, private=false, min_confs=1, conf_target=3
+2024-03-07 18:45:44.641 [INF] LTND: We're not running within systemd or the service type is not 'notify'
+2024-03-07 18:45:44.644 [INF] LTND: Waiting for chain backend to finish sync, start_height=0
+2024-03-07 18:46:48.542 [INF] LTND: Received terminated
+2024-03-07 18:46:48.542 [INF] LTND: Shutting down...
+2024-03-07 18:46:48.542 [INF] LTND: Gracefully shutting down.
+2024-03-07 18:48:18.505 [INF] LTND: Version: 0.17.0-beta commit=, build=production, logging=default, debuglevel=info
+2024-03-07 18:48:18.505 [INF] LTND: Active chain: Bitcoin (network=regtest)
+2024-03-07 18:48:18.512 [INF] RPCS: RPC server listening on 127.0.0.1:10009
+2024-03-07 18:48:18.519 [INF] RPCS: gRPC proxy started at 127.0.0.1:8080
+2024-03-07 18:48:18.519 [INF] LTND: Opening the main database, this might take a few minutes...
+2024-03-07 18:48:18.519 [INF] LTND: Opening bbolt database, sync_freelist=false, auto_compact=false
+2024-03-07 18:48:18.521 [INF] LTND: Creating local graph and channel state DB instances
+2024-03-07 18:48:18.604 [INF] CHDB: Checking for schema update: latest_version=31, db_version=31
+2024-03-07 18:48:18.604 [INF] CHDB: Checking for optional update: prune_revocation_log=false, db_version=empty
+2024-03-07 18:48:18.604 [INF] LTND: Database(s) now open (time_to_open=85.137715ms)!
+2024-03-07 18:48:18.712 [INF] CHRE: Primary chain is set to: bitcoin
+2024-03-07 18:48:18.872 [INF] LNWL: Started listening for bitcoind block notifications via ZMQ on 127.0.0.1:28332
+2024-03-07 18:48:18.875 [INF] LNWL: Started listening for bitcoind transaction notifications via ZMQ on 127.0.0.1:28333
+2024-03-07 18:48:18.876 [INF] LNWL: Started polling mempool to cache new transactions
+2024-03-07 18:48:20.593 [INF] LNWL: Opened wallet
+2024-03-07 18:48:22.142 [INF] LNWL: The wallet has been unlocked without a time limit
+2024-03-07 18:48:22.154 [INF] CHRE: LightningWallet opened
+2024-03-07 18:48:22.186 [INF] LNWL: Started rescan from block 0f9188f13cb7b2c71f2a335e3a4fc328bf5beb436012afca590b1a11466e2206 (height 0) for 0 addresses
+2024-03-07 18:48:22.197 [INF] LNWL: Catching up block hashes to height 0, this might take a while
+2024-03-07 18:48:22.201 [INF] LNWL: Done catching up block hashes
+2024-03-07 18:48:22.201 [INF] LNWL: Finished rescan for 0 addresses (synced to block 0f9188f13cb7b2c71f2a335e3a4fc328bf5beb436012afca590b1a11466e2206, height 0)
+2024-03-07 18:48:22.205 [INF] HSWC: Cleaning circuits from disk for closed channels
+2024-03-07 18:48:22.206 [INF] HSWC: Finished cleaning: no closed channels found, no actions taken.
+2024-03-07 18:48:22.206 [INF] HSWC: Restoring in-memory circuit state from disk
+2024-03-07 18:48:22.209 [INF] HSWC: Payment circuits loaded: num_pending=0, num_open=0
+2024-03-07 18:48:22.231 [INF] LTND: Channel backup proxy channel notifier starting
+2024-03-07 18:48:22.232 [INF] ATPL: Instantiating autopilot with active=false, max_channels=5, allocation=0.600000, min_chan_size=20000, max_chan_size=16777215, private=false, min_confs=1, conf_target=3
+2024-03-07 18:48:22.232 [INF] LTND: We're not running within systemd or the service type is not 'notify'
+2024-03-07 18:48:22.237 [INF] LTND: Waiting for chain backend to finish sync, start_height=0
+2024-03-07 18:57:17.994 [INF] LTND: Received terminated
+2024-03-07 18:57:17.994 [INF] LTND: Shutting down...
+2024-03-07 18:57:17.994 [INF] LTND: Gracefully shutting down.
+2024-03-07 18:57:32.125 [INF] LTND: Version: 0.17.0-beta commit=, build=production, logging=default, debuglevel=info
+2024-03-07 18:57:32.125 [INF] LTND: Active chain: Bitcoin (network=regtest)
+2024-03-07 18:57:32.140 [INF] RPCS: RPC server listening on 127.0.0.1:10009
+2024-03-07 18:57:32.164 [INF] RPCS: gRPC proxy started at 127.0.0.1:8080
+2024-03-07 18:57:32.166 [INF] LTND: Opening the main database, this might take a few minutes...
+2024-03-07 18:57:32.166 [INF] LTND: Opening bbolt database, sync_freelist=false, auto_compact=false
+2024-03-07 18:57:32.167 [INF] LTND: Creating local graph and channel state DB instances
+2024-03-07 18:57:32.254 [INF] CHDB: Checking for schema update: latest_version=31, db_version=31
+2024-03-07 18:57:32.254 [INF] CHDB: Checking for optional update: prune_revocation_log=false, db_version=empty
+2024-03-07 18:57:32.254 [INF] LTND: Database(s) now open (time_to_open=87.748817ms)!
+2024-03-07 18:57:32.377 [INF] CHRE: Primary chain is set to: bitcoin
+2024-03-07 18:57:32.429 [INF] LNWL: Started listening for bitcoind block notifications via ZMQ on 127.0.0.1:28332
+2024-03-07 18:57:32.429 [INF] LNWL: Started listening for bitcoind transaction notifications via ZMQ on 127.0.0.1:28333
+2024-03-07 18:57:32.429 [INF] LNWL: Started polling mempool to cache new transactions
+2024-03-07 18:57:34.384 [INF] LNWL: Opened wallet
+2024-03-07 18:57:36.287 [INF] LNWL: The wallet has been unlocked without a time limit
+2024-03-07 18:57:36.301 [INF] CHRE: LightningWallet opened
+2024-03-07 18:57:36.367 [INF] HSWC: Cleaning circuits from disk for closed channels
+2024-03-07 18:57:36.367 [INF] HSWC: Finished cleaning: no closed channels found, no actions taken.
+2024-03-07 18:57:36.367 [INF] HSWC: Restoring in-memory circuit state from disk
+2024-03-07 18:57:36.382 [INF] HSWC: Payment circuits loaded: num_pending=0, num_open=0
+2024-03-07 18:57:36.385 [INF] LNWL: Started rescan from block 0f9188f13cb7b2c71f2a335e3a4fc328bf5beb436012afca590b1a11466e2206 (height 0) for 0 addresses
+2024-03-07 18:57:36.401 [INF] LNWL: Catching up block hashes to height 0, this might take a while
+2024-03-07 18:57:36.405 [INF] LNWL: Done catching up block hashes
+2024-03-07 18:57:36.405 [INF] LNWL: Finished rescan for 0 addresses (synced to block 0f9188f13cb7b2c71f2a335e3a4fc328bf5beb436012afca590b1a11466e2206, height 0)
+2024-03-07 18:57:36.409 [INF] LTND: Channel backup proxy channel notifier starting
+2024-03-07 18:57:36.409 [INF] ATPL: Instantiating autopilot with active=false, max_channels=5, allocation=0.600000, min_chan_size=20000, max_chan_size=16777215, private=false, min_confs=1, conf_target=3
+2024-03-07 18:57:36.409 [INF] LTND: We're not running within systemd or the service type is not 'notify'
+2024-03-07 18:57:36.413 [INF] LTND: Waiting for chain backend to finish sync, start_height=0
+2024-03-07 19:00:20.920 [INF] LTND: Version: 0.17.0-beta commit=, build=production, logging=default, debuglevel=info
+2024-03-07 19:00:20.921 [INF] LTND: Active chain: Bitcoin (network=regtest)
+2024-03-07 19:00:20.930 [INF] RPCS: RPC server listening on 127.0.0.1:10009
+2024-03-07 19:00:20.936 [INF] RPCS: gRPC proxy started at 127.0.0.1:8080
+2024-03-07 19:00:20.937 [INF] LTND: Opening the main database, this might take a few minutes...
+2024-03-07 19:00:20.937 [INF] LTND: Opening bbolt database, sync_freelist=false, auto_compact=false
+2024-03-07 19:00:20.938 [INF] LTND: Creating local graph and channel state DB instances
+2024-03-07 19:00:21.039 [INF] CHDB: Checking for schema update: latest_version=31, db_version=31
+2024-03-07 19:00:21.039 [INF] CHDB: Checking for optional update: prune_revocation_log=false, db_version=empty
+2024-03-07 19:00:21.039 [INF] LTND: Database(s) now open (time_to_open=102.129109ms)!
+2024-03-07 19:00:21.153 [INF] CHRE: Primary chain is set to: bitcoin
+2024-03-07 19:00:21.196 [INF] LNWL: Started listening for bitcoind block notifications via ZMQ on 127.0.0.1:28332
+2024-03-07 19:00:21.197 [INF] LNWL: Started listening for bitcoind transaction notifications via ZMQ on 127.0.0.1:28333
+2024-03-07 19:00:21.197 [INF] LNWL: Started polling mempool to cache new transactions
+2024-03-07 19:00:22.672 [INF] LNWL: Opened wallet
+2024-03-07 19:00:24.150 [INF] LNWL: The wallet has been unlocked without a time limit
+2024-03-07 19:00:24.162 [INF] CHRE: LightningWallet opened
+2024-03-07 19:00:24.195 [INF] HSWC: Cleaning circuits from disk for closed channels
+2024-03-07 19:00:24.195 [INF] HSWC: Finished cleaning: no closed channels found, no actions taken.
+2024-03-07 19:00:24.195 [INF] HSWC: Restoring in-memory circuit state from disk
+2024-03-07 19:00:24.199 [INF] HSWC: Payment circuits loaded: num_pending=0, num_open=0
+2024-03-07 19:00:24.206 [INF] LNWL: Started rescan from block 0f9188f13cb7b2c71f2a335e3a4fc328bf5beb436012afca590b1a11466e2206 (height 0) for 1 address
+2024-03-07 19:00:24.214 [INF] LNWL: Catching up block hashes to height 0, this might take a while
+2024-03-07 19:00:24.217 [INF] LNWL: Done catching up block hashes
+2024-03-07 19:00:24.218 [INF] LNWL: Finished rescan for 1 address (synced to block 0f9188f13cb7b2c71f2a335e3a4fc328bf5beb436012afca590b1a11466e2206, height 0)
+2024-03-07 19:00:24.223 [INF] LTND: Channel backup proxy channel notifier starting
+2024-03-07 19:00:24.223 [INF] ATPL: Instantiating autopilot with active=false, max_channels=5, allocation=0.600000, min_chan_size=20000, max_chan_size=16777215, private=false, min_confs=1, conf_target=3
+2024-03-07 19:00:24.223 [INF] LTND: We're not running within systemd or the service type is not 'notify'
+2024-03-07 19:00:24.227 [INF] LTND: Waiting for chain backend to finish sync, start_height=0
+2024-03-07 19:00:40.951 [ERR] RPCS: [/lnrpc.WalletUnlocker/UnlockWallet]: wallet already unlocked, WalletUnlocker service is no longer available
+2024-03-07 19:02:35.411 [INF] LTND: Version: 0.17.0-beta commit=, build=production, logging=default, debuglevel=info
+2024-03-07 19:02:35.411 [INF] LTND: Active chain: Bitcoin (network=regtest)
+2024-03-07 19:02:35.413 [INF] RPCS: RPC server listening on 127.0.0.1:10009
+2024-03-07 19:02:35.430 [INF] RPCS: gRPC proxy started at 127.0.0.1:8080
+2024-03-07 19:02:35.431 [INF] LTND: Opening the main database, this might take a few minutes...
+2024-03-07 19:02:35.434 [INF] LTND: Opening bbolt database, sync_freelist=false, auto_compact=false
+2024-03-07 19:02:35.435 [INF] LTND: Creating local graph and channel state DB instances
+2024-03-07 19:02:35.560 [INF] CHDB: Checking for schema update: latest_version=31, db_version=31
+2024-03-07 19:02:35.560 [INF] CHDB: Checking for optional update: prune_revocation_log=false, db_version=empty
+2024-03-07 19:02:35.560 [INF] LTND: Database(s) now open (time_to_open=126.09568ms)!
+2024-03-07 19:02:35.693 [INF] CHRE: Primary chain is set to: bitcoin
+2024-03-07 19:02:35.731 [INF] LNWL: Started listening for bitcoind block notifications via ZMQ on 127.0.0.1:28332
+2024-03-07 19:02:35.731 [INF] LNWL: Started listening for bitcoind transaction notifications via ZMQ on 127.0.0.1:28333
+2024-03-07 19:02:35.734 [INF] LNWL: Started polling mempool to cache new transactions
+2024-03-07 19:02:37.656 [INF] LNWL: Opened wallet
+2024-03-07 19:02:39.667 [INF] LNWL: The wallet has been unlocked without a time limit
+2024-03-07 19:02:39.676 [INF] CHRE: LightningWallet opened
+2024-03-07 19:02:39.724 [INF] LNWL: Started rescan from block 0f9188f13cb7b2c71f2a335e3a4fc328bf5beb436012afca590b1a11466e2206 (height 0) for 2 addresses
+2024-03-07 19:02:39.726 [INF] HSWC: Cleaning circuits from disk for closed channels
+2024-03-07 19:02:39.726 [INF] HSWC: Finished cleaning: no closed channels found, no actions taken.
+2024-03-07 19:02:39.726 [INF] HSWC: Restoring in-memory circuit state from disk
+2024-03-07 19:02:39.730 [INF] HSWC: Payment circuits loaded: num_pending=0, num_open=0
+2024-03-07 19:02:39.741 [INF] LNWL: Catching up block hashes to height 0, this might take a while
+2024-03-07 19:02:39.750 [INF] LNWL: Done catching up block hashes
+2024-03-07 19:02:39.750 [INF] LNWL: Finished rescan for 2 addresses (synced to block 0f9188f13cb7b2c71f2a335e3a4fc328bf5beb436012afca590b1a11466e2206, height 0)
+2024-03-07 19:02:39.759 [INF] LTND: Channel backup proxy channel notifier starting
+2024-03-07 19:02:39.759 [INF] ATPL: Instantiating autopilot with active=false, max_channels=5, allocation=0.600000, min_chan_size=20000, max_chan_size=16777215, private=false, min_confs=1, conf_target=3
+2024-03-07 19:02:39.760 [INF] LTND: We're not running within systemd or the service type is not 'notify'
+2024-03-07 19:02:39.767 [INF] LTND: Waiting for chain backend to finish sync, start_height=0
+2024-03-07 19:02:55.610 [ERR] RPCS: [/lnrpc.WalletUnlocker/UnlockWallet]: wallet already unlocked, WalletUnlocker service is no longer available
+2024-03-07 19:03:56.121 [INF] LTND: Version: 0.17.0-beta commit=, build=production, logging=default, debuglevel=info
+2024-03-07 19:03:56.121 [INF] LTND: Active chain: Bitcoin (network=regtest)
+2024-03-07 19:03:56.124 [INF] RPCS: RPC server listening on 127.0.0.1:10009
+2024-03-07 19:03:56.155 [INF] RPCS: gRPC proxy started at 127.0.0.1:8080
+2024-03-07 19:03:56.155 [INF] LTND: Opening the main database, this might take a few minutes...
+2024-03-07 19:03:56.155 [INF] LTND: Opening bbolt database, sync_freelist=false, auto_compact=false
+2024-03-07 19:03:56.156 [INF] LTND: Creating local graph and channel state DB instances
+2024-03-07 19:03:56.241 [INF] CHDB: Checking for schema update: latest_version=31, db_version=31
+2024-03-07 19:03:56.241 [INF] CHDB: Checking for optional update: prune_revocation_log=false, db_version=empty
+2024-03-07 19:03:56.241 [INF] LTND: Database(s) now open (time_to_open=85.415291ms)!
+2024-03-07 19:03:56.464 [INF] CHRE: Primary chain is set to: bitcoin
+2024-03-07 19:03:56.546 [INF] LNWL: Started listening for bitcoind block notifications via ZMQ on 127.0.0.1:28332
+2024-03-07 19:03:56.547 [INF] LNWL: Started listening for bitcoind transaction notifications via ZMQ on 127.0.0.1:28333
+2024-03-07 19:03:56.547 [INF] LNWL: Started polling mempool to cache new transactions
+2024-03-07 19:03:58.886 [INF] LNWL: Opened wallet
+2024-03-07 19:04:01.075 [INF] LNWL: The wallet has been unlocked without a time limit
+2024-03-07 19:04:01.105 [INF] CHRE: LightningWallet opened
+2024-03-07 19:04:01.181 [INF] HSWC: Cleaning circuits from disk for closed channels
+2024-03-07 19:04:01.181 [INF] HSWC: Finished cleaning: no closed channels found, no actions taken.
+2024-03-07 19:04:01.181 [INF] HSWC: Restoring in-memory circuit state from disk
+2024-03-07 19:04:01.186 [INF] HSWC: Payment circuits loaded: num_pending=0, num_open=0
+2024-03-07 19:04:01.200 [INF] LNWL: Started rescan from block 0f9188f13cb7b2c71f2a335e3a4fc328bf5beb436012afca590b1a11466e2206 (height 0) for 3 addresses
+2024-03-07 19:04:01.212 [INF] LNWL: Catching up block hashes to height 0, this might take a while
+2024-03-07 19:04:01.217 [INF] LNWL: Done catching up block hashes
+2024-03-07 19:04:01.218 [INF] LNWL: Finished rescan for 3 addresses (synced to block 0f9188f13cb7b2c71f2a335e3a4fc328bf5beb436012afca590b1a11466e2206, height 0)
+2024-03-07 19:04:01.221 [INF] LTND: Channel backup proxy channel notifier starting
+2024-03-07 19:04:01.221 [INF] ATPL: Instantiating autopilot with active=false, max_channels=5, allocation=0.600000, min_chan_size=20000, max_chan_size=16777215, private=false, min_confs=1, conf_target=3
+2024-03-07 19:04:01.221 [INF] LTND: We're not running within systemd or the service type is not 'notify'
+2024-03-07 19:04:01.225 [INF] LTND: Waiting for chain backend to finish sync, start_height=0
+2024-03-07 19:04:16.128 [ERR] RPCS: [/lnrpc.WalletUnlocker/UnlockWallet]: wallet already unlocked, WalletUnlocker service is no longer available
+2024-03-07 19:09:10.201 [INF] LTND: Version: 0.17.0-beta commit=, build=production, logging=default, debuglevel=info
+2024-03-07 19:09:10.201 [INF] LTND: Active chain: Bitcoin (network=regtest)
+2024-03-07 19:09:10.204 [INF] RPCS: RPC server listening on 127.0.0.1:10009
+2024-03-07 19:09:10.212 [INF] RPCS: gRPC proxy started at 127.0.0.1:8080
+2024-03-07 19:09:10.212 [INF] LTND: Opening the main database, this might take a few minutes...
+2024-03-07 19:09:10.212 [INF] LTND: Opening bbolt database, sync_freelist=false, auto_compact=false
+2024-03-07 19:09:10.212 [INF] LTND: Creating local graph and channel state DB instances
+2024-03-07 19:09:10.307 [INF] CHDB: Checking for schema update: latest_version=31, db_version=31
+2024-03-07 19:09:10.307 [INF] CHDB: Checking for optional update: prune_revocation_log=false, db_version=empty
+2024-03-07 19:09:10.307 [INF] LTND: Database(s) now open (time_to_open=95.159235ms)!
+2024-03-07 19:09:10.424 [INF] CHRE: Primary chain is set to: bitcoin
+2024-03-07 19:09:10.466 [INF] LNWL: Started listening for bitcoind block notifications via ZMQ on 127.0.0.1:28332
+2024-03-07 19:09:10.470 [INF] LNWL: Started listening for bitcoind transaction notifications via ZMQ on 127.0.0.1:28333
+2024-03-07 19:09:10.474 [INF] LNWL: Started polling mempool to cache new transactions
+2024-03-07 19:09:12.326 [INF] LNWL: Opened wallet
+2024-03-07 19:09:14.130 [INF] LNWL: The wallet has been unlocked without a time limit
+2024-03-07 19:09:14.143 [INF] CHRE: LightningWallet opened
+2024-03-07 19:09:14.189 [INF] LNWL: Started rescan from block 0f9188f13cb7b2c71f2a335e3a4fc328bf5beb436012afca590b1a11466e2206 (height 0) for 4 addresses
+2024-03-07 19:09:14.196 [INF] HSWC: Cleaning circuits from disk for closed channels
+2024-03-07 19:09:14.197 [INF] HSWC: Finished cleaning: no closed channels found, no actions taken.
+2024-03-07 19:09:14.197 [INF] HSWC: Restoring in-memory circuit state from disk
+2024-03-07 19:09:14.200 [INF] HSWC: Payment circuits loaded: num_pending=0, num_open=0
+2024-03-07 19:09:14.203 [INF] LNWL: Catching up block hashes to height 0, this might take a while
+2024-03-07 19:09:14.207 [INF] LNWL: Done catching up block hashes
+2024-03-07 19:09:14.207 [INF] LNWL: Finished rescan for 4 addresses (synced to block 0f9188f13cb7b2c71f2a335e3a4fc328bf5beb436012afca590b1a11466e2206, height 0)
+2024-03-07 19:09:14.231 [INF] LTND: Channel backup proxy channel notifier starting
+2024-03-07 19:09:14.231 [INF] ATPL: Instantiating autopilot with active=false, max_channels=5, allocation=0.600000, min_chan_size=20000, max_chan_size=16777215, private=false, min_confs=1, conf_target=3
+2024-03-07 19:09:14.231 [INF] LTND: We're not running within systemd or the service type is not 'notify'
+2024-03-07 19:09:14.234 [INF] LTND: Waiting for chain backend to finish sync, start_height=0
+2024-03-07 19:09:30.210 [ERR] RPCS: [/lnrpc.WalletUnlocker/UnlockWallet]: wallet already unlocked, WalletUnlocker service is no longer available
+2024-03-07 19:11:15.636 [INF] LTND: Version: 0.17.0-beta commit=, build=production, logging=default, debuglevel=info
+2024-03-07 19:11:15.636 [INF] LTND: Active chain: Bitcoin (network=regtest)
+2024-03-07 19:11:15.639 [INF] RPCS: RPC server listening on 127.0.0.1:10009
+2024-03-07 19:11:15.643 [INF] RPCS: gRPC proxy started at 127.0.0.1:8080
+2024-03-07 19:11:15.643 [INF] LTND: Opening the main database, this might take a few minutes...
+2024-03-07 19:11:15.643 [INF] LTND: Opening bbolt database, sync_freelist=false, auto_compact=false
+2024-03-07 19:11:15.643 [INF] LTND: Creating local graph and channel state DB instances
+2024-03-07 19:11:15.796 [INF] CHDB: Checking for schema update: latest_version=31, db_version=31
+2024-03-07 19:11:15.796 [INF] CHDB: Checking for optional update: prune_revocation_log=false, db_version=empty
+2024-03-07 19:11:15.796 [INF] LTND: Database(s) now open (time_to_open=153.653292ms)!
+2024-03-07 19:11:15.935 [INF] CHRE: Primary chain is set to: bitcoin
+2024-03-07 19:11:19.478 [INF] LTND: Received terminated
+2024-03-07 19:11:19.479 [INF] LTND: Shutting down...
+2024-03-07 19:11:19.479 [INF] LTND: Gracefully shutting down.
+2024-03-07 19:12:35.482 [INF] LTND: Version: 0.17.0-beta commit=, build=production, logging=default, debuglevel=info
+2024-03-07 19:12:35.482 [INF] LTND: Active chain: Bitcoin (network=regtest)
+2024-03-07 19:12:35.485 [INF] RPCS: RPC server listening on 127.0.0.1:10009
+2024-03-07 19:12:35.492 [INF] RPCS: gRPC proxy started at 127.0.0.1:8080
+2024-03-07 19:12:35.492 [INF] LTND: Opening the main database, this might take a few minutes...
+2024-03-07 19:12:35.492 [INF] LTND: Opening bbolt database, sync_freelist=false, auto_compact=false
+2024-03-07 19:12:35.493 [INF] LTND: Creating local graph and channel state DB instances
+2024-03-07 19:12:35.645 [INF] CHDB: Checking for schema update: latest_version=31, db_version=31
+2024-03-07 19:12:35.645 [INF] CHDB: Checking for optional update: prune_revocation_log=false, db_version=empty
+2024-03-07 19:12:35.645 [INF] LTND: Database(s) now open (time_to_open=153.112013ms)!
+2024-03-07 19:12:35.759 [INF] CHRE: Primary chain is set to: bitcoin
+2024-03-07 19:12:35.787 [INF] LNWL: Started listening for bitcoind block notifications via ZMQ on 127.0.0.1:28332
+2024-03-07 19:12:35.787 [INF] LNWL: Started listening for bitcoind transaction notifications via ZMQ on 127.0.0.1:28333
+2024-03-07 19:12:35.787 [INF] LNWL: Started polling mempool to cache new transactions
+2024-03-07 19:12:37.433 [INF] LNWL: Opened wallet
+2024-03-07 19:12:39.038 [INF] LNWL: The wallet has been unlocked without a time limit
+2024-03-07 19:12:39.051 [INF] CHRE: LightningWallet opened
+2024-03-07 19:12:39.083 [INF] HSWC: Cleaning circuits from disk for closed channels
+2024-03-07 19:12:39.083 [INF] HSWC: Finished cleaning: no closed channels found, no actions taken.
+2024-03-07 19:12:39.083 [INF] HSWC: Restoring in-memory circuit state from disk
+2024-03-07 19:12:39.087 [INF] HSWC: Payment circuits loaded: num_pending=0, num_open=0
+2024-03-07 19:12:39.102 [INF] LNWL: Started rescan from block 0f9188f13cb7b2c71f2a335e3a4fc328bf5beb436012afca590b1a11466e2206 (height 0) for 5 addresses
+2024-03-07 19:12:39.113 [INF] LNWL: Catching up block hashes to height 0, this might take a while
+2024-03-07 19:12:39.117 [INF] LNWL: Done catching up block hashes
+2024-03-07 19:12:39.117 [INF] LNWL: Finished rescan for 5 addresses (synced to block 0f9188f13cb7b2c71f2a335e3a4fc328bf5beb436012afca590b1a11466e2206, height 0)
+2024-03-07 19:12:39.121 [INF] LTND: Channel backup proxy channel notifier starting
+2024-03-07 19:12:39.121 [INF] ATPL: Instantiating autopilot with active=false, max_channels=5, allocation=0.600000, min_chan_size=20000, max_chan_size=16777215, private=false, min_confs=1, conf_target=3
+2024-03-07 19:12:39.122 [INF] LTND: We're not running within systemd or the service type is not 'notify'
+2024-03-07 19:12:39.124 [INF] LTND: Waiting for chain backend to finish sync, start_height=0
+2024-03-07 19:12:55.480 [ERR] RPCS: [/lnrpc.WalletUnlocker/UnlockWallet]: wallet already unlocked, WalletUnlocker service is no longer available
+2024-03-07 19:17:13.496 [INF] LTND: Version: 0.17.0-beta commit=, build=production, logging=default, debuglevel=info
+2024-03-07 19:17:13.501 [INF] LTND: Active chain: Bitcoin (network=regtest)
+2024-03-07 19:17:13.519 [INF] RPCS: RPC server listening on 127.0.0.1:10009
+2024-03-07 19:17:13.539 [INF] RPCS: gRPC proxy started at 127.0.0.1:8080
+2024-03-07 19:17:13.539 [INF] LTND: Opening the main database, this might take a few minutes...
+2024-03-07 19:17:13.540 [INF] LTND: Opening bbolt database, sync_freelist=false, auto_compact=false
+2024-03-07 19:17:13.540 [INF] LTND: Creating local graph and channel state DB instances
+2024-03-07 19:17:13.686 [INF] CHDB: Checking for schema update: latest_version=31, db_version=31
+2024-03-07 19:17:13.687 [INF] CHDB: Checking for optional update: prune_revocation_log=false, db_version=empty
+2024-03-07 19:17:13.687 [INF] LTND: Database(s) now open (time_to_open=146.910117ms)!
+2024-03-07 19:17:13.845 [INF] CHRE: Primary chain is set to: bitcoin
+2024-03-07 19:17:13.886 [INF] LNWL: Started listening for bitcoind block notifications via ZMQ on 127.0.0.1:28332
+2024-03-07 19:17:13.886 [INF] LNWL: Started polling mempool to cache new transactions
+2024-03-07 19:17:13.886 [INF] LNWL: Started listening for bitcoind transaction notifications via ZMQ on 127.0.0.1:28333
+2024-03-07 19:17:15.890 [INF] LNWL: Opened wallet
+2024-03-07 19:17:17.968 [INF] LNWL: The wallet has been unlocked without a time limit
+2024-03-07 19:17:18.089 [INF] CHRE: LightningWallet opened
+2024-03-07 19:17:18.124 [INF] HSWC: Cleaning circuits from disk for closed channels
+2024-03-07 19:17:18.124 [INF] HSWC: Finished cleaning: no closed channels found, no actions taken.
+2024-03-07 19:17:18.124 [INF] HSWC: Restoring in-memory circuit state from disk
+2024-03-07 19:17:18.132 [INF] HSWC: Payment circuits loaded: num_pending=0, num_open=0
+2024-03-07 19:17:18.153 [INF] LNWL: Started rescan from block 0f9188f13cb7b2c71f2a335e3a4fc328bf5beb436012afca590b1a11466e2206 (height 0) for 6 addresses
+2024-03-07 19:17:18.166 [INF] LTND: Channel backup proxy channel notifier starting
+2024-03-07 19:17:18.166 [INF] ATPL: Instantiating autopilot with active=false, max_channels=5, allocation=0.600000, min_chan_size=20000, max_chan_size=16777215, private=false, min_confs=1, conf_target=3
+2024-03-07 19:17:18.167 [INF] LTND: We're not running within systemd or the service type is not 'notify'
+2024-03-07 19:17:18.175 [INF] LTND: Waiting for chain backend to finish sync, start_height=0
+2024-03-07 19:17:18.182 [INF] LNWL: Catching up block hashes to height 0, this might take a while
+2024-03-07 19:17:18.185 [INF] LNWL: Done catching up block hashes
+2024-03-07 19:17:18.186 [INF] LNWL: Finished rescan for 6 addresses (synced to block 0f9188f13cb7b2c71f2a335e3a4fc328bf5beb436012afca590b1a11466e2206, height 0)
+2024-03-07 19:17:33.473 [ERR] RPCS: [/lnrpc.WalletUnlocker/UnlockWallet]: wallet already unlocked, WalletUnlocker service is no longer available
+2024-03-07 19:17:33.907 [INF] LNWL: Inserting unconfirmed transaction 93f1ae3da16b73b3a4422ec70274e587352cb3448df068d6adecd8354d45ffda
+2024-03-07 19:17:33.922 [INF] LNWL: Inserting unconfirmed transaction 96a128e9903d5e78b2fad4654f1d40b1deacf224f2102e2dc1a754ba9d407a4f
+2024-03-07 19:17:33.945 [INF] LNWL: Marking unconfirmed transaction 93f1ae3da16b73b3a4422ec70274e587352cb3448df068d6adecd8354d45ffda mined in block 2
+2024-03-07 19:17:33.993 [INF] LNWL: Inserting unconfirmed transaction 1f8ee8a208fc57394c302f665c777ef31d6063b436777aee5bebf74fde38335f
+2024-03-07 19:17:34.027 [INF] LNWL: Inserting unconfirmed transaction 63f8a5fd7ab904d38d7336aa2a9bb6b73ac906acdf7230e89fa64a04a1523751
+2024-03-07 19:17:34.042 [INF] LNWL: Inserting unconfirmed transaction 70b1fa64d101bb8862482af386a59abdfbb5e8297a31a8b66be90ff8b9444341
+2024-03-07 19:17:34.054 [INF] LNWL: Marking unconfirmed transaction 1f8ee8a208fc57394c302f665c777ef31d6063b436777aee5bebf74fde38335f mined in block 4
+2024-03-07 19:17:34.190 [INF] LNWL: Inserting unconfirmed transaction e68593b4158690875b6f43fbbd4f9c9c24496abbb923b25699b1290261e9e9d9
+2024-03-07 19:17:34.206 [INF] LNWL: Marking unconfirmed transaction e68593b4158690875b6f43fbbd4f9c9c24496abbb923b25699b1290261e9e9d9 mined in block 8
+2024-03-07 19:17:34.240 [INF] LNWL: Inserting unconfirmed transaction da0d83694faf719f5e52c3344e049d8591acf9ec9dea7dd324bf4521667aabfb
+2024-03-07 19:17:34.251 [INF] LNWL: Marking unconfirmed transaction da0d83694faf719f5e52c3344e049d8591acf9ec9dea7dd324bf4521667aabfb mined in block 9
+2024-03-07 19:17:34.361 [INF] LNWL: Inserting unconfirmed transaction 2aaa8d75dfa5c5170e559d7da6640205a7c4b89e989d944119e7ae28e601e08f
+2024-03-07 19:17:34.369 [INF] LNWL: Marking unconfirmed transaction 2aaa8d75dfa5c5170e559d7da6640205a7c4b89e989d944119e7ae28e601e08f mined in block 12
