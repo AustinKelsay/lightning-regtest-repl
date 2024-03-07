@@ -8,7 +8,7 @@ WALLET_PASSWORD="wallet_pass"
 mkdir -p "$BITCOIN_DATA"
 
 # Start bitcoind in the background with specified bitcoin.conf and data directory
-bitcoind -printtoconsole -debug -conf="$PROJECT_ROOT/bitcoin.conf" -datadir="$BITCOIN_DATA"
+bitcoind -printtoconsole -debug -conf="$PROJECT_ROOT/bitcoin.conf" -datadir="$BITCOIN_DATA" &
 
 # Give bitcoind some time to start
 sleep 10
@@ -94,3 +94,7 @@ echo "Funding completed."
 log_ln_node_oncahin_balance "$PROJECT_ROOT/lnd1" 10009
 log_ln_node_oncahin_balance "$PROJECT_ROOT/lnd2" 10010
 
+while true; do
+    # You can perform some regular checks or operations here
+    sleep 60  # Sleep for 60 seconds
+done
