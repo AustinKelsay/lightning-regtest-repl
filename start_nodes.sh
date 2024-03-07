@@ -54,7 +54,22 @@ mine_to_address() {
     local amount=$2
 
     # Mine the specified amount of bitcoins to the given address
-    bitcoin-cli -datadir="$BITCOIN_DATA" -rpcport=18443 -rpcuser=plebdev -rpcpassword=pass generatetoaddress $amount $address
+    bitcoin-cli -datadir="$BITCOIN_DATA" -rpcport=18443 -rpcuser=plebdev -rpcpassword=pass generatetoaddress $amount "$address"
+}
+
+log_ln_node_oncahin_balance() {
+    local lnd_dir=$1
+    local rpc_port=$2
+    local tlscertpath="${lnd_dir}/tls.cert"
+    local macaroonpath="${lnd_dir}/data/chain/bitcoin/regtest/admin.macaroon"
+
+    # Get the onchain balance
+    local balance_info=$(lncli --rpcserver=localhost:${rpc_port} \
+                                --tlscertpath=${tlscertpath} \
+                                --macaroonpath=${macaroonpath} \
+                                walletbalance)
+
+    echo "Balance for node at port ${rpc_port}: $balance_info"
 }
 
 # Initialize or unlock wallets and generate onchain addresses for each LND node
@@ -65,8 +80,17 @@ echo "LND1 Address: $lnd1_address"
 echo "LND2 Address: $lnd2_address"
 
 # Mine 100 bitcoins to each LND node
-mine_to_address $lnd1_address 100
-mine_to_address $lnd2_address 100
+mine_to_address "$lnd1_address" 100
+mine_to_address "$lnd2_address" 100
+
+# Typically, in regtest mode, mined coins are mature after 100 additional blocks
+# so we'll generate 101 blocks to ensure at least 1 confirmation for the funding transactions.
+bitcoin-cli -datadir="$BITCOIN_DATA" -rpcport=18443 -rpcuser=plebdev -rpcpassword=pass generatetoaddress 101 "$lnd1_address"
+sleep 5
 
 echo "Funding completed."
+
+# Log the onchain balance for each node
+log_ln_node_oncahin_balance "$PROJECT_ROOT/lnd1" 10009
+log_ln_node_oncahin_balance "$PROJECT_ROOT/lnd2" 10010
 
