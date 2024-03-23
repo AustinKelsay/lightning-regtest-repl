@@ -1,7 +1,17 @@
-run = "sh start_nodes.sh"
+run = "sh reset_nodes.sh && sh start_nodes.sh"
 
 [nix]
 channel = "stable-23_11"
+
+[[ports]]
+localPort = 8080
+externalPort = 8080
+exposeLocalhost = true
+
+[[ports]]
+localPort = 8081
+externalPort = 8081
+exposeLocalhost = true
 
 [[ports]]
 localPort = 18444
