@@ -1,5 +1,6 @@
 { pkgs }: {
   deps = [
+    pkgs.lsof
     pkgs.cowsay
     pkgs.bitcoind
     pkgs.lnd

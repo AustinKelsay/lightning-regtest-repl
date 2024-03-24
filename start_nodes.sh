@@ -50,15 +50,6 @@ initialize_or_unlock_lnd_wallet() {
   lncli --rpcserver=localhost:${rpc_port} --tlscertpath=${tlscertpath} --macaroonpath=${macaroonpath} newaddress p2wkh | jq -r .address
 }
 
-# Function to mine bitcoins to a specific address using bitcoind
-mine_to_address() {
-  local address=$1
-  local amount=$2
-
-  # Mine the specified amount of bitcoins to the given address
-  bitcoin-cli -datadir="$BITCOIN_DATA" -rpcport=18443 -rpcuser=plebdev -rpcpassword=pass generatetoaddress $amount "$address"
-}
-
 # Function to log the onchain balance of an LND node
 log_ln_node_onchain_balance() {
   local lnd_dir=$1
@@ -112,20 +103,22 @@ start_lnd_node "$PROJECT_ROOT/lnd1" 10009 8080
 # Start the second LND node on port 10010 and 8081 for REST
 start_lnd_node "$PROJECT_ROOT/lnd2" 10010 8081
 
-# Initialize or unlock wallets and generate onchain addresses for each LND node
+# Initialize or unlock wallet and generate onchain address for the first LND node
 lnd1_address=$(initialize_or_unlock_lnd_wallet "$PROJECT_ROOT/lnd1" 10009 "$WALLET_PASSWORD")
-lnd2_address=$(initialize_or_unlock_lnd_wallet "$PROJECT_ROOT/lnd2" 10010 "$WALLET_PASSWORD")
 
 echo "LND1 Address: $lnd1_address"
+
+# Initialize or unlock wallet and generate onchain address for the second LND node
+lnd2_address=$(initialize_or_unlock_lnd_wallet "$PROJECT_ROOT/lnd2" 10010 "$WALLET_PASSWORD")
+
 echo "LND2 Address: $lnd2_address"
 
 # Mine 100 bitcoins to each LND node
-mine_to_address "$lnd1_address" 100
-mine_to_address "$lnd2_address" 100
-
-# Typically, in regtest mode, mined coins are mature after 100 additional blocks
-# so we'll generate 101 blocks to ensure at least 1 confirmation for the funding transactions.
+# In regtest mode, mined coins are mature after 100 additional blocks
+# so we'll generate 101 blocks to ensure at least 1 confirmation for the funding transaction.
 bitcoin-cli -datadir="$BITCOIN_DATA" -rpcport=18443 -rpcuser=plebdev -rpcpassword=pass generatetoaddress 101 "$lnd1_address"
+
+bitcoin-cli -datadir="$BITCOIN_DATA" -rpcport=18443 -rpcuser=plebdev -rpcpassword=pass generatetoaddress 101 "$lnd2_address"
 
 sleep 5
 

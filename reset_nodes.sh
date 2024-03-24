@@ -16,11 +16,18 @@ is_process_running() {
   fi
 }
 
-# Function to safely stop bitcoind
+# Function to safely stop bitcoind and remove the regtest directory
 stop_bitcoind() {
   echo "Stopping bitcoind..."
   bitcoin-cli -datadir="$BITCOIN_DATA" -rpcport=18443 -rpcuser=plebdev -rpcpassword=pass stop
   sleep 5 # Wait a bit to ensure bitcoind stops gracefully
+
+  # Remove the regtest directory to start from block 0
+  local regtest_dir="${BITCOIN_DATA}/regtest"
+  if [ -d "$regtest_dir" ]; then
+    echo "Removing regtest directory..."
+    rm -rf "$regtest_dir"
+  fi
 }
 
 # Function to safely stop LND and clean up its data while preserving certain files
