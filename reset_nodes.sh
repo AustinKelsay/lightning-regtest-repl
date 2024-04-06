@@ -34,7 +34,6 @@ stop_bitcoind() {
 stop_and_cleanup_lnd() {
   local lnd_dir=$1
   local rpc_port=$2
-
   local lnd_conf="${lnd_dir}/lnd.conf"
   local tlscertpath="${lnd_dir}/tls.cert"
   local macaroonpath="${lnd_dir}/data/chain/bitcoin/regtest/admin.macaroon"
@@ -60,6 +59,12 @@ stop_and_cleanup_lnd() {
   cp "$backup_dir"/* "$lnd_dir"
   rm -rf "$backup_dir"
 }
+
+# Delete connection_info.md if it exists
+if [ -f "connection_info.md" ]; then
+  echo "Deleting connection_info.md..."
+  rm "connection_info.md"
+fi
 
 # Stop bitcoind and LND nodes and clean up
 stop_bitcoind

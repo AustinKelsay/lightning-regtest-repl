@@ -64,8 +64,8 @@ log_ln_node_onchain_balance() {
   echo "Balance for node at port ${rpc_port}: $balance_info"
 }
 
-# Function to log the connection details of an LND node
-log_lnd_node_connection_details() {
+# Function to write the connection details and identity pubkey of an LND node to connection_info.md
+write_lnd_node_connection_details() {
   local lnd_dir=$1
   local rpc_port=$2
   local rest_port=$3
@@ -73,25 +73,39 @@ log_lnd_node_connection_details() {
   local tlscertpath="${lnd_dir}/tls.cert"
   local macaroonpath="${lnd_dir}/data/chain/bitcoin/regtest/admin.macaroon"
 
-  # Get the IP address of the node
-  local ip_address=$(hostname -I | awk '{print $1}')
+  # Get the Replit host URL
+  local replit_host_url=$(echo $REPL_SLUG | sed 's/^/@/' | sed 's/$/-00-24lluiepd75yx.spock.replit.dev/')
 
-  # Bake a new macaroon with the desired permissions
-  local macaroon_file="${lnd_dir}/readonly.macaroon"
+  # Bake a new admin macaroon with all permissions
+  local macaroon_file="${lnd_dir}/data/chain/bitcoin/regtest/admin.macaroon"
   lncli --rpcserver=localhost:${rpc_port} --tlscertpath=${tlscertpath} --macaroonpath=${macaroonpath} \
-    bakemacaroon info:read offchain:read onchain:read invoices:read signer:read \
+    bakemacaroon \
     --save_to="${macaroon_file}"
 
   # Encode the macaroon in hex format
   local macaroon_hex=$(xxd -ps -c 1000 "${macaroon_file}")
 
-  echo "Connection details for LND node at port ${rpc_port}:"
-  echo "IP address: ${ip_address}"
-  echo "gRPC port: ${rpc_port}"
-  echo "REST port: ${rest_port}"
-  echo "Hex-encoded macaroon:"
-  echo "${macaroon_hex}"
-  echo "---"
+  # Get the identity pubkey of the LND node
+  local identity_pubkey=$(lncli --rpcserver=localhost:${rpc_port} --tlscertpath=${tlscertpath} --macaroonpath=${macaroonpath} getinfo | jq -r .identity_pubkey)
+
+  # Write the connection details and identity pubkey to connection_info.md with line breaks
+  {
+    echo "Connection details for LND node at port ${rpc_port}:"
+    echo ""
+    echo "Replit Host URL: https://${replit_host_url}"
+    echo ""
+    echo "gRPC port: ${rpc_port}"
+    echo ""
+    echo "REST port: ${rest_port}"
+    echo ""
+    echo "Hex-encoded macaroon:"
+    echo "${macaroon_hex}"
+    echo ""
+    echo "Identity Pubkey: ${identity_pubkey}"
+    echo ""
+    echo "---"
+    echo ""
+  } >> connection_info.md
 }
 
 # Start bitcoind
@@ -108,7 +122,7 @@ lnd1_address=$(initialize_or_unlock_lnd_wallet "$PROJECT_ROOT/lnd1" 10009 "$WALL
 
 echo "LND1 Address: $lnd1_address"
 
-# Initialize or unlock wallet and generate onchain address for the second LND node
+# Initialize or unlock wallet and generate onchain address for the second LND node 
 lnd2_address=$(initialize_or_unlock_lnd_wallet "$PROJECT_ROOT/lnd2" 10010 "$WALLET_PASSWORD")
 
 echo "LND2 Address: $lnd2_address"
@@ -128,9 +142,9 @@ echo "Funding completed."
 log_ln_node_onchain_balance "$PROJECT_ROOT/lnd1" 10009
 log_ln_node_onchain_balance "$PROJECT_ROOT/lnd2" 10010
 
-# Log the connection details for each LND node
-log_lnd_node_connection_details "$PROJECT_ROOT/lnd1" 10009 8080
-log_lnd_node_connection_details "$PROJECT_ROOT/lnd2" 10010 8081
+# Write the connection details and identity pubkey for each LND node to connection_info.md
+write_lnd_node_connection_details "$PROJECT_ROOT/lnd1" 10009 8080
+write_lnd_node_connection_details "$PROJECT_ROOT/lnd2" 10010 8081
 
 # Keep the script running to perform regular checks or operations
 while true; do
