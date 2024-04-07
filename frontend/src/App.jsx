@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 import Channels from "./components/Channels";
 import AddPeer from "./components/AddPeer";
-import OpenChannel from "./components/OpenChannel";
 import "./App.css";
 
 function App() {
@@ -9,77 +9,187 @@ function App() {
   const [channels, setChannels] = useState([]);
   const [onchainBalance, setOnchainBalance] = useState(0);
   const [lightningBalance, setLightningBalance] = useState(0);
+  const [showConnectForm, setShowConnectForm] = useState(false);
+  const [host, setHost] = useState("");
+  const [port, setPort] = useState("");
+  const [macaroon, setMacaroon] = useState("");
+  const [showOpenChannelForm, setShowOpenChannelForm] = useState(false);
+  const [nodePubkey, setNodePubkey] = useState("");
+  const [localFundingAmount, setLocalFundingAmount] = useState(0);
+  const [privateChannel, setPrivateChannel] = useState(false);
 
   const loadAll = async function () {
     await loadChannels();
-    await loadBalances();
+    await loadChannelBalances();
+    await loadOnchainBalance();
   };
 
   useEffect(() => {
-    loadAll();
+    if (connectedNode?.identity_pubkey) {
+      loadAll();
+    }
   }, [connectedNode]);
 
   const connect = async () => {
-    await window.webln.enable();
+    try {
+      const response = await axios.get(`${host}:${port}/v1/getinfo`, {
+        headers: {
+          "grpc-metadata-macaroon": macaroon,
+        },
+      });
 
-    const info = await window.webln.getInfo();
+      console.log("yoooo", response.data);
 
-    console.log(info, "infooooo");
-
-    setConnectedNode(info?.node);
-    
-    // if (!info.methods || !info.methods.includes("walletbalance")) {
-    //   alert(
-    //     "Your connected WebLN provider is not supported. Please use Alby with a LND node",
-    //   );
-    //   document.location = "/";
-    //   return false;
-    // }
-    return true;
+      if (response.data) {
+        setConnectedNode(response.data);
+        setShowConnectForm(false);
+      } else {
+        alert("Failed to connect to the node");
+      }
+    } catch (error) {
+      console.error("Error connecting to the node:", error);
+      alert("Failed to connect to the node");
+    }
   };
 
   const loadChannels = async function () {
-    const nodeDetails = await window.webln.request("getnodeinfo", {
-      pub_key: connectedNode.pubkey,
-    });
-    console.log("nodeDetails", nodeDetails);
-    const result = await window.webln.request("listchannels");
+    try {
+      const response = await axios.get(`${host}:${port}/v1/channels`, {
+        headers: {
+          "grpc-metadata-macaroon": macaroon,
+        },
+      });
 
-    const channels = result.channels;
-    console.log("channels", channels);
-    setChannels(
-      channels.sort((a, b) => {
-        return b.local_balance - a.local_balance;
-      }),
-    );
+      console.log("load channels", response.data);
+
+      if (response.data?.channels.length > 0) {
+        setChannels(response.data.channels);
+      }
+    } catch (error) {
+      console.error("Error loading channel balances:", error);
+    }
   };
 
-  const loadBalances = async function () {
-    await window.webln.enable();
-    const channelbalance = await window.webln.request("channelbalance");
-    const walletbalance = await window.webln.request("walletbalance");
-    const onchain = walletbalance.total_balance;
-    const lightning = channelbalance.balance;
-    setLightningBalance(lightning);
-    setOnchainBalance(onchain);
+  const loadChannelBalances = async function () {
+    try {
+      const response = await axios.get(`${host}:${port}/v1/balance/channels`, {
+        headers: {
+          "grpc-metadata-macaroon": macaroon,
+        },
+      });
 
-    console.log({ onchainBalance });
+      console.log("load channel balance", response.data);
+
+      if (response.data?.local_balance) {
+        setLightningBalance(response.data.local_balance?.sat);
+      }
+    } catch (error) {
+      console.error("Error loading channel balances:", error);
+    }
+  };
+
+  const loadOnchainBalance = async function () {
+    try {
+      const response = await axios.get(
+        `${host}:${port}/v1/balance/blockchain`,
+        {
+          headers: {
+            "grpc-metadata-macaroon": macaroon,
+          },
+        },
+      );
+
+      if (response.data) {
+        setOnchainBalance(response.data.total_balance);
+      }
+    } catch (error) {
+      console.error("Error loading onchain balance:", error);
+    }
+  };
+
+  function hexToBase64(hexstring) {
+    return window.btoa(
+      hexstring
+        .match(/\w{2}/g)
+        .map(function (a) {
+          return String.fromCharCode(parseInt(a, 16));
+        })
+        .join(""),
+    );
+  }
+
+  const openChannel = async () => {
+    try {
+      const response = await axios.post(
+        `${host}:${port}/v1/channels/stream`,
+        {
+          node_pubkey: hexToBase64(nodePubkey),
+          local_funding_amount: localFundingAmount,
+          private: privateChannel,
+        },
+        {
+          headers: {
+            "grpc-metadata-macaroon": macaroon,
+          },
+        },
+      );
+
+      console.log("Open channel response:", response.data);
+      // Handle the response and update the channels state if needed
+      setShowOpenChannelForm(false);
+    } catch (error) {
+      console.error("Error opening channel:", error);
+      alert("Failed to open channel");
+    }
   };
 
   return (
     <div className="App">
       <header className="App-header">
         <h1>Node Dashboard</h1>
-        {connectedNode?.pubkey && <p>Connected to: {connectedNode.alias}</p>}
+        {connectedNode?.identity_pubkey && (
+          <p>Connected to: {connectedNode.alias}</p>
+        )}
       </header>
+
       {/* connect button */}
-      {!connectedNode?.pubkey && (
-        <button onClick={connect}>Connect to your node</button>
+      {!connectedNode?.identity_pubkey && (
+        <button onClick={() => setShowConnectForm(true)}>
+          Connect to your node
+        </button>
       )}
+
+      {/* connect form */}
+      {showConnectForm && (
+        <div className="connect-form">
+          <input
+            type="text"
+            placeholder="Host"
+            value={host}
+            onChange={(e) => setHost(e.target.value)}
+          />
+          <input
+            type="text"
+            placeholder="Port"
+            value={port}
+            onChange={(e) => setPort(e.target.value)}
+          />
+          <input
+            placeholder="Macaroon"
+            value={macaroon}
+            onChange={(e) => setMacaroon(e.target.value)}
+          />
+          <button onClick={connect}>Connect</button>
+        </div>
+      )}
+
       {/* connected */}
-      {connectedNode?.pubkey && <h2>Connected to {connectedNode?.pubkey}</h2>}
+      {connectedNode?.identity_pubkey && (
+        <h2>Connected to {connectedNode?.identity_pubkey}</h2>
+      )}
+
       {/* balances */}
-      {connectedNode?.pubkey && (
+      {connectedNode?.identity_pubkey && (
         <div className="balances">
           <div className="balance">
             <h3>Onchain balance</h3>
@@ -91,10 +201,46 @@ function App() {
           </div>
         </div>
       )}
+
       {/* add peer */}
-      {connectedNode?.pubkey && <AddPeer />}
+      {connectedNode?.identity_pubkey && (
+        <AddPeer host={host} port={port} macaroon={macaroon} />
+      )}
+
       {/* open channel */}
-      {connectedNode?.pubkey && <OpenChannel />}
+      {connectedNode?.identity_pubkey && (
+        <button onClick={() => setShowOpenChannelForm(true)}>
+          Open Channel
+        </button>
+      )}
+
+      {/* open channel form */}
+      {showOpenChannelForm && (
+        <div className="open-channel-form">
+          <input
+            type="text"
+            placeholder="Node Pubkey"
+            value={nodePubkey}
+            onChange={(e) => setNodePubkey(e.target.value)}
+          />
+          <input
+            type="number"
+            placeholder="Local Funding Amount (sats)"
+            value={localFundingAmount}
+            onChange={(e) => setLocalFundingAmount(e.target.value)}
+          />
+          <label>
+            <input
+              type="checkbox"
+              checked={privateChannel}
+              onChange={(e) => setPrivateChannel(e.target.checked)}
+            />
+            Private Channel
+          </label>
+          <button onClick={openChannel}>Open Channel</button>
+        </div>
+      )}
+
       {/* channels */}
       <Channels channels={channels} />
     </div>

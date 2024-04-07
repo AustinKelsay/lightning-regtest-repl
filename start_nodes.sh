@@ -24,11 +24,15 @@ start_bitcoind() {
 # Function to start an LND node
 start_lnd_node() {
   local lnd_dir=$1
-  local rpc_port=$2
-  local rest_port=$3
+  local listen_port=$2
+  local rpc_port=$3
+  local rest_port=$4
 
   # Start the LND node with the specified configuration
-  lnd --lnddir="$lnd_dir" --configfile="$lnd_dir/lnd.conf" --noseedbackup --rpclisten=localhost:$rpc_port --restlisten=localhost:$rest_port &
+  lnd --lnddir="$lnd_dir" --configfile="$lnd_dir/lnd.conf" --noseedbackup \
+      --listen=localhost:$listen_port \
+      --rpclisten=localhost:$rpc_port \
+      --restlisten=localhost:$rest_port &
 
   # Give LND a moment to start
   sleep 10
@@ -73,8 +77,8 @@ write_lnd_node_connection_details() {
   local tlscertpath="${lnd_dir}/tls.cert"
   local macaroonpath="${lnd_dir}/data/chain/bitcoin/regtest/admin.macaroon"
 
-  # Get the Replit host URL
-  local replit_host_url=$(echo $REPL_SLUG | sed 's/^/@/' | sed 's/$/-00-24lluiepd75yx.spock.replit.dev/')
+  # Get the IP address
+  local ip_address=$(hostname -I | awk '{print $1}')
 
   # Bake a new admin macaroon with all permissions
   local macaroon_file="${lnd_dir}/data/chain/bitcoin/regtest/admin.macaroon"
@@ -90,11 +94,7 @@ write_lnd_node_connection_details() {
 
   # Write the connection details and identity pubkey to connection_info.md with line breaks
   {
-    echo "Connection details for LND node at port ${rpc_port}:"
-    echo ""
-    echo "Replit Host URL: https://${replit_host_url}"
-    echo ""
-    echo "gRPC port: ${rpc_port}"
+    echo "Connection details for LND node at ${lnd_dir}:"
     echo ""
     echo "REST port: ${rest_port}"
     echo ""
@@ -112,10 +112,10 @@ write_lnd_node_connection_details() {
 start_bitcoind
 
 # Start the first LND node on port 10009 and 8080 for REST
-start_lnd_node "$PROJECT_ROOT/lnd1" 10009 8080
+start_lnd_node "$PROJECT_ROOT/lnd1" 9735 10009 8080
 
-# Start the second LND node on port 10010 and 8081 for REST
-start_lnd_node "$PROJECT_ROOT/lnd2" 10010 8081
+# Start the second LND node on port 10010 and 8099 for REST
+start_lnd_node "$PROJECT_ROOT/lnd2" 9736 10010 8099
 
 # Initialize or unlock wallet and generate onchain address for the first LND node
 lnd1_address=$(initialize_or_unlock_lnd_wallet "$PROJECT_ROOT/lnd1" 10009 "$WALLET_PASSWORD")
@@ -144,10 +144,14 @@ log_ln_node_onchain_balance "$PROJECT_ROOT/lnd2" 10010
 
 # Write the connection details and identity pubkey for each LND node to connection_info.md
 write_lnd_node_connection_details "$PROJECT_ROOT/lnd1" 10009 8080
-write_lnd_node_connection_details "$PROJECT_ROOT/lnd2" 10010 8081
+write_lnd_node_connection_details "$PROJECT_ROOT/lnd2" 10010 8099
 
 # Keep the script running to perform regular checks or operations
 while true; do
-  # You can add your desired checks or operations here
-  sleep 60 # Sleep for 60 seconds
+  # Mine a single block to the first LND node's address every 30 seconds
+  bitcoin-cli -datadir="$BITCOIN_DATA" -rpcport=18443 -rpcuser=plebdev -rpcpassword=pass generatetoaddress 1 "$lnd1_address"
+
+  echo "Mined a block at $(date)"
+
+  sleep 30 # Sleep for 30 seconds
 done

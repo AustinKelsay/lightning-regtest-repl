@@ -1,44 +1,68 @@
 import React, { useState } from "react";
-import "./components.css";
+import axios from "axios";
 
-function AddPeer() {
-  const [showForm, setShowForm] = useState(false);
-  const [pubkey, setPubkey] = useState("");
-  const [host, setHost] = useState("");
-  const [successMessage, setSuccessMessage] = useState(null);
+function AddPeer({ host, port, macaroon }) {
+  const [showAddPeerForm, setShowAddPeerForm] = useState(false);
+  const [peerPubkey, setPeerPubkey] = useState("");
+  const [peerHost, setPeerHost] = useState("");
+  const [isPermanent, setIsPermanent] = useState(false);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const addPeer = async () => {
     try {
-      await window.webln.request("connectpeer", { addr: { pubkey, host } });
-      setSuccessMessage("Peer connection is successful");
+      const response = await axios.post(
+        `${host}:${port}/v1/peers`,
+        {
+          addr: {
+            pubkey: peerPubkey,
+            host: peerHost,
+          },
+          perm: true,
+        },
+        {
+          headers: {
+            "grpc-metadata-macaroon": macaroon,
+          },
+        }
+      );
+
+      console.log("Add peer response:", response.data);
+      // Handle the response and update the state if needed
+      setShowAddPeerForm(false);
     } catch (error) {
-      setSuccessMessage("Error: " + error.message);
+      console.error("Error adding peer:", error);
+      alert("Failed to add peer");
     }
-    setShowForm(false);
   };
 
   return (
     <div>
-      <button onClick={() => setShowForm(!showForm)}>Add peer</button>
-      {showForm && (
-        <form onSubmit={handleSubmit}>
-          <label>Pubkey:</label>
+      <button onClick={() => setShowAddPeerForm(true)}>Add Peer</button>
+
+      {showAddPeerForm && (
+        <div className="add-peer-form">
           <input
             type="text"
-            value={pubkey}
-            onChange={(e) => setPubkey(e.target.value)}
+            placeholder="Peer Pubkey"
+            value={peerPubkey}
+            onChange={(e) => setPeerPubkey(e.target.value)}
           />
-          <label>Host:</label>
           <input
             type="text"
-            value={host}
-            onChange={(e) => setHost(e.target.value)}
+            placeholder="Peer Host"
+            value={peerHost}
+            onChange={(e) => setPeerHost(e.target.value)}
           />
-          <button type="submit">Submit</button>
-        </form>
+          <label>
+            <input
+              type="checkbox"
+              checked={isPermanent}
+              onChange={(e) => setIsPermanent(e.target.checked)}
+            />
+            Permanent Connection
+          </label>
+          <button onClick={addPeer}>Add Peer</button>
+        </div>
       )}
-      {successMessage && <div>{successMessage}</div>}
     </div>
   );
 }
