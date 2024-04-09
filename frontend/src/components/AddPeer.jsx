@@ -5,7 +5,6 @@ function AddPeer({ host, port, macaroon }) {
   const [showAddPeerForm, setShowAddPeerForm] = useState(false);
   const [peerPubkey, setPeerPubkey] = useState("");
   const [peerHost, setPeerHost] = useState("");
-  const [isPermanent, setIsPermanent] = useState(false);
 
   const addPeer = async () => {
     try {
@@ -22,21 +21,31 @@ function AddPeer({ host, port, macaroon }) {
           headers: {
             "grpc-metadata-macaroon": macaroon,
           },
-        }
+        },
       );
 
       console.log("Add peer response:", response.data);
-      // Handle the response and update the state if needed
-      setShowAddPeerForm(false);
+      alert("Peer added successfully."); // Optionally, show success message
+      setShowAddPeerForm(false); // Hide form on success
     } catch (error) {
       console.error("Error adding peer:", error);
-      alert("Failed to add peer");
+      // Display a detailed error message
+      let errorMessage = "Failed to add peer.";
+      if (error.response && error.response.data && error.response.data.error) {
+        errorMessage += ` Error: ${error.response.data.error}`;
+      } else if (error.message) {
+        errorMessage += ` Error: ${error.message}`;
+      }
+      alert(errorMessage);
     }
   };
 
   return (
     <div>
-      <button onClick={() => setShowAddPeerForm(true)}>Add Peer</button>
+      <h2>Peering</h2>
+      <button onClick={() => setShowAddPeerForm(!showAddPeerForm)}>
+        Add Peer
+      </button>
 
       {showAddPeerForm && (
         <div className="add-peer-form">
@@ -52,14 +61,6 @@ function AddPeer({ host, port, macaroon }) {
             value={peerHost}
             onChange={(e) => setPeerHost(e.target.value)}
           />
-          <label>
-            <input
-              type="checkbox"
-              checked={isPermanent}
-              onChange={(e) => setIsPermanent(e.target.checked)}
-            />
-            Permanent Connection
-          </label>
           <button onClick={addPeer}>Add Peer</button>
         </div>
       )}
