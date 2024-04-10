@@ -85,8 +85,7 @@ write_lnd_node_connection_details() {
   local macaroon_file="${lnd_dir}/data/chain/bitcoin/regtest/admin.macaroon"
   lncli --rpcserver=localhost:${rpc_port} --tlscertpath=${tlscertpath} --macaroonpath=${macaroonpath} \
     bakemacaroon \
-    --save_to="${macaroon_file}" \
-    info:read invoices:write message:read message:write onchain:read peers:read peers:write signer:generate signer:read offchain:read offchain:write
+    --save_to="${macaroon_file}"
 
   # Encode the macaroon in hex format
   local macaroon_hex=$(xxd -ps -c 1000 "${macaroon_file}")
