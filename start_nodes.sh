@@ -73,6 +73,7 @@ write_lnd_node_connection_details() {
   local lnd_dir=$1
   local rpc_port=$2
   local rest_port=$3
+  local gossip_port=$4
 
   local tlscertpath="${lnd_dir}/tls.cert"
   local macaroonpath="${lnd_dir}/data/chain/bitcoin/regtest/admin.macaroon"
@@ -84,7 +85,8 @@ write_lnd_node_connection_details() {
   local macaroon_file="${lnd_dir}/data/chain/bitcoin/regtest/admin.macaroon"
   lncli --rpcserver=localhost:${rpc_port} --tlscertpath=${tlscertpath} --macaroonpath=${macaroonpath} \
     bakemacaroon \
-    --save_to="${macaroon_file}"
+    --save_to="${macaroon_file}" \
+    info:read invoices:write message:read message:write onchain:read peers:read peers:write signer:generate signer:read offchain:read offchain:write
 
   # Encode the macaroon in hex format
   local macaroon_hex=$(xxd -ps -c 1000 "${macaroon_file}")
@@ -97,6 +99,8 @@ write_lnd_node_connection_details() {
     echo "Connection details for LND node at ${lnd_dir}:"
     echo ""
     echo "REST port: ${rest_port}"
+    echo ""
+    echo "Peering port: ${gossip_port}"
     echo ""
     echo "Hex-encoded macaroon:"
     echo "${macaroon_hex}"
@@ -134,7 +138,7 @@ bitcoin-cli -datadir="$BITCOIN_DATA" -rpcport=18443 -rpcuser=plebdev -rpcpasswor
 
 bitcoin-cli -datadir="$BITCOIN_DATA" -rpcport=18443 -rpcuser=plebdev -rpcpassword=pass generatetoaddress 101 "$lnd2_address"
 
-sleep 5
+sleep 10
 
 echo "Funding completed."
 
@@ -143,8 +147,8 @@ log_ln_node_onchain_balance "$PROJECT_ROOT/lnd1" 10009
 log_ln_node_onchain_balance "$PROJECT_ROOT/lnd2" 10010
 
 # Write the connection details and identity pubkey for each LND node to connection_info.md
-write_lnd_node_connection_details "$PROJECT_ROOT/lnd1" 10009 8080
-write_lnd_node_connection_details "$PROJECT_ROOT/lnd2" 10010 8099
+write_lnd_node_connection_details "$PROJECT_ROOT/lnd1" 10009 8080 9735
+write_lnd_node_connection_details "$PROJECT_ROOT/lnd2" 10010 8099 9736
 
 # Keep the script running to perform regular checks or operations
 while true; do
