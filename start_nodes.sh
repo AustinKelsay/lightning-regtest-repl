@@ -153,5 +153,5 @@ while true; do
 
   echo "Mined a block at $(date)"
 
-  sleep 30 # Sleep for 30 seconds
+  sleep 10 # Sleep for 10 seconds
 done
