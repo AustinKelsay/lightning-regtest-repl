@@ -1,20 +1,41 @@
-// imports the useState hook from React and the axios library
+// Import the necessary dependencies
+// - React: The core React library
+// - useState: A hook from React that allows functional components to have state
+// - axios: A library for making HTTP requests
 import React, { useState } from "react";
 import axios from "axios";
 
+// Define the LightningWallet functional component
+// It receives props: host, port, macaroon, and lightningBalance
 function LightningWallet({ host, port, macaroon, lightningBalance }) {
-  // useState allows us to store and update the state of different peices of data in the component
-  const [receiveShowing, setReceiveShowing] = useState(false); // For toggling the receive form
-  const [sendShowing, setSendShowing] = useState(false); // For toggling the send form
-  const [invoice, setInvoice] = useState(""); // For storing the invoice to be paid
-  const [amount, setAmount] = useState(""); // For storing the amount when creating an invoice
+  // Use the useState hook to manage the component's state
+  // - receiveShowing: A boolean indicating whether the receive form is visible (default: false)
+  // - sendShowing: A boolean indicating whether the send form is visible (default: false)
+  // - invoice: A string to store the invoice to be paid (default: empty string)
+  // - amount: A string to store the amount when creating an invoice (default: empty string)
+  const [receiveShowing, setReceiveShowing] = useState(false);
+  const [sendShowing, setSendShowing] = useState(false);
+  const [invoice, setInvoice] = useState("");
+  const [amount, setAmount] = useState("");
 
   // Function to create an invoice
-  const createInvoice = async () => {};
+  const createInvoice = async () => {
+    // Implement the logic to create an invoice here
+    // You can use the `host`, `port`, `macaroon`, and `amount` variables
+    // to make an HTTP request to your Lightning node's API
+    // and handle the response accordingly
+  };
 
   // Function to pay an invoice
-  const payInvoice = async () => {};
+  const payInvoice = async () => {
+    // Implement the logic to pay an invoice here
+    // You can use the `host`, `port`, `macaroon`, and `invoice` variables
+    // to make an HTTP request to your Lightning node's API
+    // and handle the response accordingly
+  };
 
+  // The component's render method
+  // It returns the JSX that defines the structure and appearance of the component
   return (
     <div>
       {/* Display the lightning balance */}
@@ -24,6 +45,7 @@ function LightningWallet({ host, port, macaroon, lightningBalance }) {
       </div>
 
       {/* Buttons to toggle the receive and send forms */}
+      {/* When clicked, they update the respective state variables */}
       <div>
         <button onClick={() => setReceiveShowing(!receiveShowing)}>
           Receive
@@ -32,6 +54,7 @@ function LightningWallet({ host, port, macaroon, lightningBalance }) {
       </div>
 
       {/* Render the receive form if receiveShowing is true */}
+      {/* It displays an input field for the amount and a button to create an invoice */}
       {receiveShowing && (
         <div className="invoice-form">
           <input
@@ -45,6 +68,7 @@ function LightningWallet({ host, port, macaroon, lightningBalance }) {
       )}
 
       {/* Render the send form if sendShowing is true */}
+      {/* It displays an input field for the invoice and a button to pay the invoice */}
       {sendShowing && (
         <div className="invoice-form">
           <input
@@ -60,4 +84,6 @@ function LightningWallet({ host, port, macaroon, lightningBalance }) {
   );
 }
 
+// Export the LightningWallet component as the default export
+// This allows other files to import and use this component
 export default LightningWallet;
