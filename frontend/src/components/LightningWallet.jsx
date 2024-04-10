@@ -1,73 +1,29 @@
+// imports the useState hook from React and the axios library
 import React, { useState } from "react";
 import axios from "axios";
 
 function LightningWallet({ host, port, macaroon, lightningBalance }) {
+  // useState allows us to store and update the state of different peices of data in the component
   const [receiveShowing, setReceiveShowing] = useState(false); // For toggling the receive form
   const [sendShowing, setSendShowing] = useState(false); // For toggling the send form
-  const [invoice, setInvoice] = useState(""); // For paying an invoice
-  const [amount, setAmount] = useState(""); // For creating an invoice
-  const [memo, setMemo] = useState(""); // Optional memo for the invoice
+  const [invoice, setInvoice] = useState(""); // For storing the invoice to be paid
+  const [amount, setAmount] = useState(""); // For storing the amount when creating an invoice
 
-  const createInvoice = async () => {
-    try {
-      const response = await axios.post(
-        `${host}:${port}/v1/invoices`,
-        {
-          value: amount,
-          memo: memo,
-        },
-        {
-          headers: {
-            "grpc-metadata-macaroon": macaroon,
-          },
-        },
-      );
+  // Function to create an invoice
+  const createInvoice = async () => {};
 
-      console.log("Create invoice response:", response.data);
-      alert(`Invoice created successfully\n\n${response.data.payment_request}`);
-      setReceiveShowing(false);
-      setAmount("");
-      setMemo("");
-    } catch (error) {
-      console.error("Error creating invoice:", error);
-      const errorMessage = error.response?.data?.error || error.message;
-      alert(`Failed to create invoice: ${errorMessage}`);
-    }
-  };
-
-  const payInvoice = async () => {
-    try {
-      const response = await axios.post(
-        `${host}:${port}/v1/channels/transactions`,
-        {
-          payment_request: invoice,
-        },
-        {
-          headers: {
-            "grpc-metadata-macaroon": macaroon,
-          },
-        },
-      );
-
-      console.log("Pay invoice response:", response.data);
-      alert(
-        `Invoice paid successfully\n\npayment preimage: ${response.data.payment_preimage}`,
-      );
-      setSendShowing(false);
-      setInvoice("");
-    } catch (error) {
-      console.error("Error paying invoice:", error);
-      const errorMessage = error.response?.data?.error || error.message;
-      alert(`Failed to pay invoice: ${errorMessage}`);
-    }
-  };
+  // Function to pay an invoice
+  const payInvoice = async () => {};
 
   return (
     <div>
+      {/* Display the lightning balance */}
       <div className="balance">
         <h3>Lightning balance</h3>
         <p>{lightningBalance} sats</p>
       </div>
+
+      {/* Buttons to toggle the receive and send forms */}
       <div>
         <button onClick={() => setReceiveShowing(!receiveShowing)}>
           Receive
@@ -75,6 +31,7 @@ function LightningWallet({ host, port, macaroon, lightningBalance }) {
         <button onClick={() => setSendShowing(!sendShowing)}>Send</button>
       </div>
 
+      {/* Render the receive form if receiveShowing is true */}
       {receiveShowing && (
         <div className="invoice-form">
           <input
@@ -83,15 +40,11 @@ function LightningWallet({ host, port, macaroon, lightningBalance }) {
             value={amount}
             onChange={(e) => setAmount(e.target.value)}
           />
-          <input
-            type="text"
-            placeholder="Memo (Optional)"
-            value={memo}
-            onChange={(e) => setMemo(e.target.value)}
-          />
           <button onClick={createInvoice}>Create Invoice</button>
         </div>
       )}
+
+      {/* Render the send form if sendShowing is true */}
       {sendShowing && (
         <div className="invoice-form">
           <input
