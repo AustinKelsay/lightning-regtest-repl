@@ -18,6 +18,7 @@ const Channels = ({ channels, host, port, macaroon, loadChannels }) => {
     );
   }
 
+  // https://lightning.engineering/api-docs/api/lnd/lightning/open-channel-sync
   const openChannel = async () => {
     try {
       const options = {

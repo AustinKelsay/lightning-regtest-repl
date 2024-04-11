@@ -27,7 +27,7 @@ function App() {
       const response = await axios.get(`${host}:${port}/v1/getinfo`, {
         headers: {
           "grpc-metadata-macaroon": macaroon,
-        }
+        },
       });
 
       console.log("connect response", response.data);
@@ -40,12 +40,17 @@ function App() {
         alert("Failed to connect to the node");
       }
     } catch (error) {
-      alert(`Failed to connect to the node: ${JSON.stringify(error.response?.data)}`);
+      alert(
+        `Failed to connect to the node: ${JSON.stringify(error.response?.data)}`,
+      );
     }
   };
 
+  // https://lightning.engineering/api-docs/api/lnd/lightning/get-info
   const getInfo = async function () {
+    // Try will try to run the code, if it fails it will catch the error
     try {
+      // Define the request options for the getinfo endpoint
       const options = {
         method: "GET",
         url: `${host}:${port}/v1/getinfo`,
@@ -54,17 +59,22 @@ function App() {
         },
       };
 
+      // Make the API request to get the node info
       const response = await axios(options);
+      // Log the response data to the console
       console.log("getinfo", response.data);
 
       if (response.data) {
+        // Set the connected node state to the response data
         setConnectedNode(response.data);
       }
     } catch (error) {
+      // If there is an error, alert the user with the error message
       alert(`Failed to get info: ${JSON.stringify(error.response?.data)}`);
     }
   };
 
+  // https://lightning.engineering/api-docs/api/lnd/lightning/list-channels
   const loadChannels = async function () {
     try {
       const options = {
@@ -86,6 +96,7 @@ function App() {
     }
   };
 
+  // https://lightning.engineering/api-docs/api/lnd/lightning/channel-balance
   const loadChannelBalances = async function () {
     try {
       const options = {
@@ -103,10 +114,13 @@ function App() {
         setLightningBalance(response.data.local_balance?.sat);
       }
     } catch (error) {
-      alert(`Failed to load channel balances: ${JSON.stringify(error.response?.data)}`);
+      alert(
+        `Failed to load channel balances: ${JSON.stringify(error.response?.data)}`,
+      );
     }
   };
 
+  // https://lightning.engineering/api-docs/api/lnd/lightning/wallet-balance
   const loadOnchainBalance = async function () {
     try {
       const options = {
@@ -123,14 +137,20 @@ function App() {
         setOnchainBalance(response.data.total_balance);
       }
     } catch (error) {
-      alert(`Failed to load onchain balance: ${JSON.stringify(error.response?.data)}`);
+      alert(
+        `Failed to load onchain balance: ${JSON.stringify(error.response?.data)}`,
+      );
     }
   };
 
   return (
     <div className="App">
       <header className="App-header">
-        {connectedNode?.identity_pubkey ? <p>Connected to: {connectedNode.alias}</p> : <p>Not connected</p>}
+        {connectedNode?.identity_pubkey ? (
+          <p>Connected to: {connectedNode.alias}</p>
+        ) : (
+          <p>Not connected</p>
+        )}
       </header>
 
       {/* Refresh button */}
@@ -140,7 +160,9 @@ function App() {
             Refresh
           </button>
 
-          <p className="block-height">Block Height: {connectedNode.block_height}</p>
+          <p className="block-height">
+            Block Height: {connectedNode.block_height}
+          </p>
         </>
       )}
 
@@ -176,7 +198,9 @@ function App() {
       )}
 
       {/* connected */}
-      {connectedNode?.identity_pubkey && <h2>Connected to {connectedNode?.identity_pubkey}</h2>}
+      {connectedNode?.identity_pubkey && (
+        <h2>Connected to {connectedNode?.identity_pubkey}</h2>
+      )}
 
       {/* balance */}
       {connectedNode?.identity_pubkey && (
@@ -189,13 +213,22 @@ function App() {
       )}
 
       {/* Lightning Wallet */}
-      {connectedNode?.identity_pubkey && <LightningWallet host={host} port={port} macaroon={macaroon} lightningBalance={lightningBalance} />}
+      {connectedNode?.identity_pubkey && (
+        <LightningWallet
+          host={host}
+          port={port}
+          macaroon={macaroon}
+          lightningBalance={lightningBalance}
+        />
+      )}
 
       {/* add peer */}
-      {connectedNode?.identity_pubkey && <AddPeer host={host} port={port} macaroon={macaroon} />}
+      {connectedNode?.identity_pubkey && (
+        <AddPeer host={host} port={port} macaroon={macaroon} />
+      )}
 
       {/* channels */}
-      {connectedNode?.identity_pubkey &&
+      {connectedNode?.identity_pubkey && (
         <Channels
           channels={channels}
           host={host}
@@ -203,7 +236,7 @@ function App() {
           macaroon={macaroon}
           loadChannels={loadChannels}
         />
-      }
+      )}
     </div>
   );
 }

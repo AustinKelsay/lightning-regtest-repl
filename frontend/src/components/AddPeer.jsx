@@ -6,6 +6,7 @@ function AddPeer({ host, port, macaroon }) {
   const [peerPubkey, setPeerPubkey] = useState("");
   const [peerHost, setPeerHost] = useState("");
 
+  // https://lightning.engineering/api-docs/api/lnd/lightning/connect-peer
   const addPeer = async () => {
     try {
       const options = {

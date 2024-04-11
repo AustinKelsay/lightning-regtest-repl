@@ -19,6 +19,7 @@ function LightningWallet({ host, port, macaroon, lightningBalance }) {
   const [amount, setAmount] = useState("");
 
   // Function to create an invoice
+  // https://lightning.engineering/api-docs/api/lnd/lightning/add-invoice
   const createInvoice = async () => {
     // Implement the logic to create an invoice here
     // You can use the `host`, `port`, `macaroon`, and `amount` variables
@@ -27,6 +28,7 @@ function LightningWallet({ host, port, macaroon, lightningBalance }) {
   };
 
   // Function to pay an invoice
+  // https://lightning.engineering/api-docs/api/lnd/lightning/send-payment-sync
   const payInvoice = async () => {
     // Implement the logic to pay an invoice here
     // You can use the `host`, `port`, `macaroon`, and `invoice` variables
