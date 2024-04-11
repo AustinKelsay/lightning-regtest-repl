@@ -20,29 +20,29 @@ const Channels = ({ channels, host, port, macaroon, loadChannels }) => {
 
   const openChannel = async () => {
     try {
-      const response = await axios.post(
-        `${host}:${port}/v1/channels`,
-        {
+      const options = {
+        method: "POST",
+        url: `${host}:${port}/v1/channels`,
+        data: {
           node_pubkey: hexToBase64(nodePubkey),
           local_funding_amount: localFundingAmount,
           private: false,
         },
-        {
-          headers: {
-            "grpc-metadata-macaroon": macaroon,
-          },
+        headers: {
+          "grpc-metadata-macaroon": macaroon,
         },
-      );
+      };
 
+      const response = await axios(options);
       console.log("Open channel response:", response.data);
+
       if (response.data.funding_txid_bytes) {
         setShowOpenChannelForm(false);
         alert("Channel opening initiated");
         loadChannels();
       }
     } catch (error) {
-      console.error("Error opening channel:", error);
-      alert("Failed to open channel");
+      alert(`Failed to open channel: ${JSON.stringify(error.response?.data)}`);
     }
   };
 

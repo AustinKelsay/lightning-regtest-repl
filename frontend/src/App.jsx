@@ -14,9 +14,6 @@ function App() {
   const [host, setHost] = useState("");
   const [port, setPort] = useState("");
   const [macaroon, setMacaroon] = useState("");
-  const [showOpenChannelForm, setShowOpenChannelForm] = useState(false);
-  const [nodePubkey, setNodePubkey] = useState("");
-  const [localFundingAmount, setLocalFundingAmount] = useState(0);
 
   const loadAll = async function () {
     await getInfo();
@@ -43,84 +40,92 @@ function App() {
         alert("Failed to connect to the node");
       }
     } catch (error) {
-      console.error("Error connecting to the node:", error);
-      alert("Failed to connect to the node");
+      alert(`Failed to connect to the node: ${JSON.stringify(error.response?.data)}`);
     }
   };
 
   const getInfo = async function () {
     try {
-      const response = await axios.get(`${host}:${port}/v1/getinfo`, {
+      const options = {
+        method: "GET",
+        url: `${host}:${port}/v1/getinfo`,
         headers: {
           "grpc-metadata-macaroon": macaroon,
-        }
-      });
+        },
+      };
 
+      const response = await axios(options);
       console.log("getinfo", response.data);
 
       if (response.data) {
         setConnectedNode(response.data);
       }
-    }
-    catch (error) {
-      console.error("Error getting info:", error);
+    } catch (error) {
+      alert(`Failed to get info: ${JSON.stringify(error.response?.data)}`);
     }
   };
 
   const loadChannels = async function () {
     try {
-      const response = await axios.get(`${host}:${port}/v1/channels`, {
+      const options = {
+        method: "GET",
+        url: `${host}:${port}/v1/channels`,
         headers: {
           "grpc-metadata-macaroon": macaroon,
-        }
-      });
+        },
+      };
 
+      const response = await axios(options);
       console.log("load channels", response.data);
 
       if (response.data?.channels.length > 0) {
         setChannels(response.data.channels);
       }
-    }
-    catch (error) {
-      console.error("Error loading channel balances:", error);
+    } catch (error) {
+      alert(`Failed to load channels: ${JSON.stringify(error.response?.data)}`);
     }
   };
 
   const loadChannelBalances = async function () {
     try {
-      const response = await axios.get(`${host}:${port}/v1/balance/channels`, {
+      const options = {
+        method: "GET",
+        url: `${host}:${port}/v1/balance/channels`,
         headers: {
           "grpc-metadata-macaroon": macaroon,
-        }
-      });
+        },
+      };
 
+      const response = await axios(options);
       console.log("load channel balance", response.data);
 
       if (response.data?.local_balance) {
         setLightningBalance(response.data.local_balance?.sat);
       }
-    }
-    catch (error) {
-      console.error("Error loading channel balances:", error);
+    } catch (error) {
+      alert(`Failed to load channel balances: ${JSON.stringify(error.response?.data)}`);
     }
   };
 
   const loadOnchainBalance = async function () {
     try {
-      const response = await axios.get(`${host}:${port}/v1/balance/blockchain`, {
+      const options = {
+        method: "GET",
+        url: `${host}:${port}/v1/balance/blockchain`,
         headers: {
           "grpc-metadata-macaroon": macaroon,
-        }
-      });
+        },
+      };
+
+      const response = await axios(options);
 
       if (response.data) {
         setOnchainBalance(response.data.total_balance);
       }
+    } catch (error) {
+      alert(`Failed to load onchain balance: ${JSON.stringify(error.response?.data)}`);
     }
-    catch (error) {
-      console.error("Error loading onchain balance:", error);
-    }
-  }
+  };
 
   return (
     <div className="App">

@@ -8,35 +8,27 @@ function AddPeer({ host, port, macaroon }) {
 
   const addPeer = async () => {
     try {
-      const response = await axios.post(
-        `${host}:${port}/v1/peers`,
-        {
+      const options = {
+        method: "POST",
+        url: `${host}:${port}/v1/peers`,
+        data: {
           addr: {
             pubkey: peerPubkey,
             host: peerHost,
           },
           perm: true,
         },
-        {
-          headers: {
-            "grpc-metadata-macaroon": macaroon,
-          },
+        headers: {
+          "grpc-metadata-macaroon": macaroon,
         },
-      );
+      };
 
+      const response = await axios(options);
       console.log("Add peer response:", response.data);
-      alert("Peer added successfully."); // Optionally, show success message
-      setShowAddPeerForm(false); // Hide form on success
+      alert("Peer added successfully.");
+      setShowAddPeerForm(false);
     } catch (error) {
-      console.error("Error adding peer:", error);
-      // Display a detailed error message
-      let errorMessage = "Failed to add peer.";
-      if (error.response && error.response.data && error.response.data.error) {
-        errorMessage += ` Error: ${error.response.data.error}`;
-      } else if (error.message) {
-        errorMessage += ` Error: ${error.message}`;
-      }
-      alert(errorMessage);
+      alert(`Failed to add peer: ${JSON.stringify(error.response?.data)}`);
     }
   };
 
